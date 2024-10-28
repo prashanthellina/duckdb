@@ -432,6 +432,10 @@ typedef struct {
 	                                                    duckdb_table_description *out);
 	char *(*duckdb_table_description_get_column_name)(duckdb_table_description table_description, idx_t index);
 	duckdb_logical_type (*duckdb_param_logical_type)(duckdb_prepared_statement prepared_statement, idx_t param_idx);
+	duckdb_vector (*duckdb_map_vector_get_keys)(duckdb_vector vector);
+	duckdb_vector (*duckdb_map_vector_get_values)(duckdb_vector vector);
+	duckdb_vector (*duckdb_union_vector_get_tags)(duckdb_vector vector);
+	duckdb_vector (*duckdb_union_vector_get_member)(duckdb_vector vector, idx_t tag);
 } duckdb_ext_api_v0;
 
 //===--------------------------------------------------------------------===//
@@ -814,6 +818,10 @@ inline duckdb_ext_api_v0 CreateAPIv0() {
 	result.duckdb_table_description_create_ext = duckdb_table_description_create_ext;
 	result.duckdb_table_description_get_column_name = duckdb_table_description_get_column_name;
 	result.duckdb_param_logical_type = duckdb_param_logical_type;
+	result.duckdb_map_vector_get_keys = duckdb_map_vector_get_keys;
+	result.duckdb_map_vector_get_values = duckdb_map_vector_get_values;
+	result.duckdb_union_vector_get_tags = duckdb_union_vector_get_tags;
+	result.duckdb_union_vector_get_member = duckdb_union_vector_get_member;
 	return result;
 }
 
