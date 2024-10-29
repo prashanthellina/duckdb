@@ -432,6 +432,9 @@ typedef struct {
 	                                                    duckdb_table_description *out);
 	char *(*duckdb_table_description_get_column_name)(duckdb_table_description table_description, idx_t index);
 	duckdb_logical_type (*duckdb_param_logical_type)(duckdb_prepared_statement prepared_statement, idx_t param_idx);
+	duckdb_value (*duckdb_create_map_value)(duckdb_logical_type map_type, duckdb_value *keys, duckdb_value *values,
+	                                        idx_t count);
+	duckdb_value (*duckdb_create_union_value)(duckdb_logical_type union_type, duckdb_value value, idx_t tag);
 } duckdb_ext_api_v0;
 
 //===--------------------------------------------------------------------===//
@@ -814,6 +817,8 @@ inline duckdb_ext_api_v0 CreateAPIv0() {
 	result.duckdb_table_description_create_ext = duckdb_table_description_create_ext;
 	result.duckdb_table_description_get_column_name = duckdb_table_description_get_column_name;
 	result.duckdb_param_logical_type = duckdb_param_logical_type;
+	result.duckdb_create_map_value = duckdb_create_map_value;
+	result.duckdb_create_union_value = duckdb_create_union_value;
 	return result;
 }
 
