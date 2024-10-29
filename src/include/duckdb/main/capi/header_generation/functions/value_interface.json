@@ -863,7 +863,7 @@
                     "name": "value"
                 },
                 {
-                    "type": "idx_t",
+                    "type": "uint8_t",
                     "name": "tag"
                 }
             ],
