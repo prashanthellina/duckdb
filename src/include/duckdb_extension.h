@@ -513,6 +513,9 @@ typedef struct {
 	duckdb_vector (*duckdb_map_vector_get_values)(duckdb_vector vector);
 	duckdb_vector (*duckdb_union_vector_get_tags)(duckdb_vector vector);
 	duckdb_vector (*duckdb_union_vector_get_member)(duckdb_vector vector, idx_t tag);
+	duckdb_value (*duckdb_create_map_value)(duckdb_logical_type map_type, duckdb_value *keys, duckdb_value *values,
+	                                        idx_t count);
+	duckdb_value (*duckdb_create_union_value)(duckdb_logical_type union_type, duckdb_value value, uint8_t tag);
 #endif
 
 } duckdb_ext_api_v0;
@@ -896,6 +899,8 @@ typedef struct {
 
 // Version dev
 #define duckdb_param_logical_type                      duckdb_ext_api.duckdb_param_logical_type
+#define duckdb_create_map_value                        duckdb_ext_api.duckdb_create_map_value
+#define duckdb_create_union_value                      duckdb_ext_api.duckdb_create_union_value
 #define duckdb_map_vector_get_keys                     duckdb_ext_api.duckdb_map_vector_get_keys
 #define duckdb_map_vector_get_values                   duckdb_ext_api.duckdb_map_vector_get_values
 #define duckdb_union_vector_get_tags                   duckdb_ext_api.duckdb_union_vector_get_tags
