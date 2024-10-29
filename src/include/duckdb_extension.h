@@ -498,7 +498,7 @@ typedef struct {
 	duckdb_logical_type (*duckdb_param_logical_type)(duckdb_prepared_statement prepared_statement, idx_t param_idx);
 	duckdb_value (*duckdb_create_map_value)(duckdb_logical_type map_type, duckdb_value *keys, duckdb_value *values,
 	                                        idx_t count);
-	duckdb_value (*duckdb_create_union_value)(duckdb_logical_type union_type, duckdb_value value, idx_t tag);
+	duckdb_value (*duckdb_create_union_value)(duckdb_logical_type union_type, duckdb_value value, uint8_t tag);
 #endif
 
 } duckdb_ext_api_v0;
