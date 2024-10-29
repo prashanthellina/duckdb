@@ -509,6 +509,10 @@ typedef struct {
 	idx_t (*duckdb_table_filter_get_struct_child_index)(duckdb_table_filter filter);
 	const char *(*duckdb_table_filter_get_struct_child_name)(duckdb_table_filter filter);
 	duckdb_table_filter (*duckdb_table_filter_get_struct_child_filter)(duckdb_table_filter filter);
+	duckdb_vector (*duckdb_map_vector_get_keys)(duckdb_vector vector);
+	duckdb_vector (*duckdb_map_vector_get_values)(duckdb_vector vector);
+	duckdb_vector (*duckdb_union_vector_get_tags)(duckdb_vector vector);
+	duckdb_vector (*duckdb_union_vector_get_member)(duckdb_vector vector, idx_t tag);
 #endif
 
 } duckdb_ext_api_v0;
@@ -892,6 +896,10 @@ typedef struct {
 
 // Version dev
 #define duckdb_param_logical_type                      duckdb_ext_api.duckdb_param_logical_type
+#define duckdb_map_vector_get_keys                     duckdb_ext_api.duckdb_map_vector_get_keys
+#define duckdb_map_vector_get_values                   duckdb_ext_api.duckdb_map_vector_get_values
+#define duckdb_union_vector_get_tags                   duckdb_ext_api.duckdb_union_vector_get_tags
+#define duckdb_union_vector_get_member                 duckdb_ext_api.duckdb_union_vector_get_member
 #define duckdb_table_function_supports_filter_pushdown duckdb_ext_api.duckdb_table_function_supports_filter_pushdown
 #define duckdb_table_function_supports_filter_prune    duckdb_ext_api.duckdb_table_function_supports_filter_prune
 #define duckdb_init_get_table_filters                  duckdb_ext_api.duckdb_init_get_table_filters

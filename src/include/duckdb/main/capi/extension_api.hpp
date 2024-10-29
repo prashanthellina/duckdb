@@ -445,6 +445,10 @@ typedef struct {
 	idx_t (*duckdb_table_filter_get_struct_child_index)(duckdb_table_filter filter);
 	const char *(*duckdb_table_filter_get_struct_child_name)(duckdb_table_filter filter);
 	duckdb_table_filter (*duckdb_table_filter_get_struct_child_filter)(duckdb_table_filter filter);
+	duckdb_vector (*duckdb_map_vector_get_keys)(duckdb_vector vector);
+	duckdb_vector (*duckdb_map_vector_get_values)(duckdb_vector vector);
+	duckdb_vector (*duckdb_union_vector_get_tags)(duckdb_vector vector);
+	duckdb_vector (*duckdb_union_vector_get_member)(duckdb_vector vector, idx_t tag);
 } duckdb_ext_api_v0;
 
 //===--------------------------------------------------------------------===//
@@ -840,6 +844,10 @@ inline duckdb_ext_api_v0 CreateAPIv0() {
 	result.duckdb_table_filter_get_struct_child_index = duckdb_table_filter_get_struct_child_index;
 	result.duckdb_table_filter_get_struct_child_name = duckdb_table_filter_get_struct_child_name;
 	result.duckdb_table_filter_get_struct_child_filter = duckdb_table_filter_get_struct_child_filter;
+	result.duckdb_map_vector_get_keys = duckdb_map_vector_get_keys;
+	result.duckdb_map_vector_get_values = duckdb_map_vector_get_values;
+	result.duckdb_union_vector_get_tags = duckdb_union_vector_get_tags;
+	result.duckdb_union_vector_get_member = duckdb_union_vector_get_member;
 	return result;
 }
 
