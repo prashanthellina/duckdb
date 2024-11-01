@@ -499,7 +499,8 @@ typedef struct {
 	duckdb_vector (*duckdb_map_vector_get_keys)(duckdb_vector vector);
 	duckdb_vector (*duckdb_map_vector_get_values)(duckdb_vector vector);
 	duckdb_vector (*duckdb_union_vector_get_tags)(duckdb_vector vector);
-	duckdb_vector (*duckdb_union_vector_get_member)(duckdb_vector vector, idx_t tag);
+	duckdb_vector (*duckdb_union_vector_get_member)(duckdb_vector vector, uint8_t tag);
+	void (*duckdb_union_vector_set_tag)(duckdb_vector vector, idx_t index, uint8_t tag);
 #endif
 
 } duckdb_ext_api_v0;
@@ -887,6 +888,7 @@ typedef struct {
 #define duckdb_map_vector_get_values             duckdb_ext_api.duckdb_map_vector_get_values
 #define duckdb_union_vector_get_tags             duckdb_ext_api.duckdb_union_vector_get_tags
 #define duckdb_union_vector_get_member           duckdb_ext_api.duckdb_union_vector_get_member
+#define duckdb_union_vector_set_tag              duckdb_ext_api.duckdb_union_vector_set_tag
 #define duckdb_appender_create_ext               duckdb_ext_api.duckdb_appender_create_ext
 #define duckdb_table_description_create_ext      duckdb_ext_api.duckdb_table_description_create_ext
 #define duckdb_table_description_get_column_name duckdb_ext_api.duckdb_table_description_get_column_name
