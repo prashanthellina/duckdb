@@ -23,6 +23,7 @@
         "duckdb_union_vector_get_tags",
         "duckdb_union_vector_get_member",
         "duckdb_create_map_value",
-        "duckdb_create_union_value"
+        "duckdb_create_union_value",
+        "duckdb_union_vector_set_tag"
     ]
 }
