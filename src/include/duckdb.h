@@ -239,7 +239,8 @@ typedef enum duckdb_table_filter_type {
 	DUCKDB_TABLE_FILTER_CONJUNCTION_OR = 3,
 	DUCKDB_TABLE_FILTER_CONJUNCTION_AND = 4,
 	DUCKDB_TABLE_FILTER_STRUCT_EXTRACT = 5,
-	DUCKDB_TABLE_FILTER_INVALID = 6
+	DUCKDB_TABLE_FILTER_OPTIONAL = 6,
+	DUCKDB_TABLE_FILTER_INVALID = 7
 } duckdb_table_filter_type;
 //! An enum over DuckDB's different table filter comparison types.
 typedef enum duckdb_table_filter_comparison_type {
@@ -3315,8 +3316,6 @@ DUCKDB_API void duckdb_table_function_supports_projection_pushdown(duckdb_table_
 /*!
 Sets whether or not the given table function supports filter pushdown.
 
-If this is set to true, the system will provide a list of all required columns in the `init` stage through
-the `duckdb_init_get_column_count` and `duckdb_init_get_column_index` functions.
 This is set to false by default.
 
 * @param table_function The table function

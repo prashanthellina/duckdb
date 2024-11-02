@@ -236,7 +236,8 @@ typedef enum duckdb_table_filter_type {
 	DUCKDB_TABLE_FILTER_CONJUNCTION_OR = 3,
 	DUCKDB_TABLE_FILTER_CONJUNCTION_AND = 4,
 	DUCKDB_TABLE_FILTER_STRUCT_EXTRACT = 5,
-	DUCKDB_TABLE_FILTER_INVALID = 6
+	DUCKDB_TABLE_FILTER_OPTIONAL = 6,
+	DUCKDB_TABLE_FILTER_INVALID = 7
 } duckdb_table_filter_type;
 //! An enum over DuckDB's different table filter comparison types.
 typedef enum duckdb_table_filter_comparison_type {
