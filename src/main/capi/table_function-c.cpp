@@ -8,6 +8,7 @@
 #include "duckdb/storage/statistics/node_statistics.hpp"
 #include "duckdb/planner/filter/constant_filter.hpp"
 #include "duckdb/planner/filter/struct_filter.hpp"
+#include "duckdb/planner/filter/optional_filter.hpp"
 
 namespace duckdb {
 
@@ -548,6 +549,16 @@ idx_t duckdb_table_filter_get_children_count(duckdb_table_filter filter) {
 		return f.child_filters.size();
 	} break;
 
+	case duckdb::TableFilterType::STRUCT_EXTRACT: {
+		auto &f = reinterpret_cast<duckdb::StructFilter &>(tfilter);
+		return f.child_filter ? 1 : 0;
+	} break;
+
+	case duckdb::TableFilterType::OPTIONAL_FILTER: {
+		auto &f = reinterpret_cast<duckdb::OptionalFilter &>(tfilter);
+		return f.child_filter ? 1 : 0;
+	} break;
+
 	default:
 		return 0;
 	}
@@ -574,6 +585,28 @@ duckdb_table_filter duckdb_table_filter_get_child(duckdb_table_filter filter, id
 			return nullptr;
 		}
 		return reinterpret_cast<duckdb_table_filter>(f.child_filters[child_index].get());
+	} break;
+
+	case duckdb::TableFilterType::STRUCT_EXTRACT: {
+		auto &f = reinterpret_cast<duckdb::StructFilter &>(tfilter);
+		if (child_index > 0) {
+			return nullptr;
+		}
+		if (!f.child_filter) {
+			return nullptr;
+		}
+		return reinterpret_cast<duckdb_table_filter>(f.child_filter.get());
+	} break;
+
+	case duckdb::TableFilterType::OPTIONAL_FILTER: {
+		auto &f = reinterpret_cast<duckdb::OptionalFilter &>(tfilter);
+		if (child_index > 0) {
+			return nullptr;
+		}
+		if (!f.child_filter) {
+			return nullptr;
+		}
+		return reinterpret_cast<duckdb_table_filter>(f.child_filter.get());
 	} break;
 
 	default:
