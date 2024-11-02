@@ -293,6 +293,8 @@ duckdb_table_filter_type TableFilterTypeToC(duckdb::TableFilterType filter_type)
 		return DUCKDB_TABLE_FILTER_CONJUNCTION_AND;
 	case duckdb::TableFilterType::STRUCT_EXTRACT:
 		return DUCKDB_TABLE_FILTER_STRUCT_EXTRACT;
+	case duckdb::TableFilterType::OPTIONAL_FILTER:
+		return DUCKDB_TABLE_FILTER_OPTIONAL;
 	default:
 		return DUCKDB_TABLE_FILTER_INVALID;
 	}
@@ -312,6 +314,8 @@ duckdb::TableFilterType TableFilterTypeFromC(duckdb_table_filter_type filter_typ
 		return duckdb::TableFilterType::CONJUNCTION_AND;
 	case DUCKDB_TABLE_FILTER_STRUCT_EXTRACT:
 		return duckdb::TableFilterType::STRUCT_EXTRACT;
+	case DUCKDB_TABLE_FILTER_OPTIONAL:
+		return duckdb::TableFilterType::OPTIONAL_FILTER;
 	default: // LCOV_EXCL_START
 		D_ASSERT(0);
 		return duckdb::TableFilterType::CONSTANT_COMPARISON;

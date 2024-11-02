@@ -240,7 +240,7 @@
                 }
             ],
             "comment": {
-                "description": "Sets whether or not the given table function supports filter pushdown.\n\nIf this is set to true, the system will provide a list of all required columns in the `init` stage through\nthe `duckdb_init_get_column_count` and `duckdb_init_get_column_index` functions.\nThis is set to false by default.\n\n",
+                "description": "Sets whether or not the given table function supports filter pushdown.\n\nThis is set to false by default.\n\n",
                 "param_comments": {
                     "table_function": "The table function",
                     "pushdown": "True if the table function supports filter pushdown, false otherwise."
