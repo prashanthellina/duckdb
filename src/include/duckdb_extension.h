@@ -500,6 +500,10 @@ typedef struct {
 	duckdb_value (*duckdb_create_null_value)();
 	idx_t (*duckdb_get_list_size)(duckdb_value value);
 	duckdb_value (*duckdb_get_list_child)(duckdb_value value, idx_t index);
+	duckdb_vector (*duckdb_map_vector_get_keys)(duckdb_vector vector);
+	duckdb_vector (*duckdb_map_vector_get_values)(duckdb_vector vector);
+	duckdb_vector (*duckdb_union_vector_get_tags)(duckdb_vector vector);
+	duckdb_vector (*duckdb_union_vector_get_member)(duckdb_vector vector, idx_t tag);
 #endif
 
 } duckdb_ext_api_v0;
@@ -887,6 +891,10 @@ typedef struct {
 #define duckdb_create_null_value                 duckdb_ext_api.duckdb_create_null_value
 #define duckdb_get_list_size                     duckdb_ext_api.duckdb_get_list_size
 #define duckdb_get_list_child                    duckdb_ext_api.duckdb_get_list_child
+#define duckdb_map_vector_get_keys               duckdb_ext_api.duckdb_map_vector_get_keys
+#define duckdb_map_vector_get_values             duckdb_ext_api.duckdb_map_vector_get_values
+#define duckdb_union_vector_get_tags             duckdb_ext_api.duckdb_union_vector_get_tags
+#define duckdb_union_vector_get_member           duckdb_ext_api.duckdb_union_vector_get_member
 #define duckdb_appender_create_ext               duckdb_ext_api.duckdb_appender_create_ext
 #define duckdb_table_description_create_ext      duckdb_ext_api.duckdb_table_description_create_ext
 #define duckdb_table_description_get_column_name duckdb_ext_api.duckdb_table_description_get_column_name

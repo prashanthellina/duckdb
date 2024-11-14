@@ -8,6 +8,10 @@
         "duckdb_is_null_value",
         "duckdb_create_null_value",
         "duckdb_get_list_size",
-        "duckdb_get_list_child"
+        "duckdb_get_list_child",
+        "duckdb_map_vector_get_keys",
+        "duckdb_map_vector_get_values",
+        "duckdb_union_vector_get_tags",
+        "duckdb_union_vector_get_member"
     ]
 }
