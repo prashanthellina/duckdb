@@ -500,6 +500,9 @@ typedef struct {
 	duckdb_value (*duckdb_create_null_value)();
 	idx_t (*duckdb_get_list_size)(duckdb_value value);
 	duckdb_value (*duckdb_get_list_child)(duckdb_value value, idx_t index);
+	duckdb_value (*duckdb_create_map_value)(duckdb_logical_type map_type, duckdb_value *keys, duckdb_value *values,
+	                                        idx_t count);
+	duckdb_value (*duckdb_create_union_value)(duckdb_logical_type union_type, duckdb_value value, idx_t tag);
 #endif
 
 } duckdb_ext_api_v0;
@@ -883,6 +886,8 @@ typedef struct {
 
 // Version dev
 #define duckdb_param_logical_type                duckdb_ext_api.duckdb_param_logical_type
+#define duckdb_create_map_value                  duckdb_ext_api.duckdb_create_map_value
+#define duckdb_create_union_value                duckdb_ext_api.duckdb_create_union_value
 #define duckdb_is_null_value                     duckdb_ext_api.duckdb_is_null_value
 #define duckdb_create_null_value                 duckdb_ext_api.duckdb_create_null_value
 #define duckdb_get_list_size                     duckdb_ext_api.duckdb_get_list_size
