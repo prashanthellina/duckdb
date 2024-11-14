@@ -436,6 +436,19 @@ typedef struct {
 	duckdb_value (*duckdb_create_null_value)();
 	idx_t (*duckdb_get_list_size)(duckdb_value value);
 	duckdb_value (*duckdb_get_list_child)(duckdb_value value, idx_t index);
+	void (*duckdb_table_function_supports_filter_pushdown)(duckdb_table_function table_function, bool pushdown);
+	void (*duckdb_table_function_supports_filter_prune)(duckdb_table_function table_function, bool prune);
+	duckdb_table_filters (*duckdb_init_get_table_filters)(duckdb_init_info info);
+	idx_t (*duckdb_table_filters_size)(duckdb_table_filters filters);
+	duckdb_table_filter (*duckdb_table_filters_get_filter)(duckdb_table_filters filters, idx_t filter_index);
+	duckdb_table_filter_type (*duckdb_table_filter_get_type)(duckdb_table_filter filter);
+	idx_t (*duckdb_table_filter_get_children_count)(duckdb_table_filter filter);
+	duckdb_table_filter (*duckdb_table_filter_get_child)(duckdb_table_filter filter, idx_t child_index);
+	duckdb_table_filter_comparison_type (*duckdb_table_filter_get_comparison_type)(duckdb_table_filter filter);
+	duckdb_value (*duckdb_table_filter_get_constant)(duckdb_table_filter filter);
+	idx_t (*duckdb_table_filter_get_struct_child_index)(duckdb_table_filter filter);
+	const char *(*duckdb_table_filter_get_struct_child_name)(duckdb_table_filter filter);
+	duckdb_table_filter (*duckdb_table_filter_get_struct_child_filter)(duckdb_table_filter filter);
 } duckdb_ext_api_v0;
 
 //===--------------------------------------------------------------------===//
@@ -822,6 +835,19 @@ inline duckdb_ext_api_v0 CreateAPIv0() {
 	result.duckdb_create_null_value = duckdb_create_null_value;
 	result.duckdb_get_list_size = duckdb_get_list_size;
 	result.duckdb_get_list_child = duckdb_get_list_child;
+	result.duckdb_table_function_supports_filter_pushdown = duckdb_table_function_supports_filter_pushdown;
+	result.duckdb_table_function_supports_filter_prune = duckdb_table_function_supports_filter_prune;
+	result.duckdb_init_get_table_filters = duckdb_init_get_table_filters;
+	result.duckdb_table_filters_size = duckdb_table_filters_size;
+	result.duckdb_table_filters_get_filter = duckdb_table_filters_get_filter;
+	result.duckdb_table_filter_get_type = duckdb_table_filter_get_type;
+	result.duckdb_table_filter_get_children_count = duckdb_table_filter_get_children_count;
+	result.duckdb_table_filter_get_child = duckdb_table_filter_get_child;
+	result.duckdb_table_filter_get_comparison_type = duckdb_table_filter_get_comparison_type;
+	result.duckdb_table_filter_get_constant = duckdb_table_filter_get_constant;
+	result.duckdb_table_filter_get_struct_child_index = duckdb_table_filter_get_struct_child_index;
+	result.duckdb_table_filter_get_struct_child_name = duckdb_table_filter_get_struct_child_name;
+	result.duckdb_table_filter_get_struct_child_filter = duckdb_table_filter_get_struct_child_filter;
 	return result;
 }
 
