@@ -503,6 +503,19 @@ typedef struct {
 	duckdb_value (*duckdb_create_enum_value)(duckdb_logical_type type, uint64_t value);
 	uint64_t (*duckdb_get_enum_value)(duckdb_value value);
 	duckdb_value (*duckdb_get_struct_child)(duckdb_value value, idx_t index);
+	void (*duckdb_table_function_supports_filter_pushdown)(duckdb_table_function table_function, bool pushdown);
+	void (*duckdb_table_function_supports_filter_prune)(duckdb_table_function table_function, bool prune);
+	duckdb_table_filters (*duckdb_init_get_table_filters)(duckdb_init_info info);
+	idx_t (*duckdb_table_filters_size)(duckdb_table_filters filters);
+	duckdb_table_filter (*duckdb_table_filters_get_filter)(duckdb_table_filters filters, idx_t filter_index);
+	duckdb_table_filter_type (*duckdb_table_filter_get_type)(duckdb_table_filter filter);
+	idx_t (*duckdb_table_filter_get_children_count)(duckdb_table_filter filter);
+	duckdb_table_filter (*duckdb_table_filter_get_child)(duckdb_table_filter filter, idx_t child_index);
+	duckdb_table_filter_comparison_type (*duckdb_table_filter_get_comparison_type)(duckdb_table_filter filter);
+	duckdb_value (*duckdb_table_filter_get_constant)(duckdb_table_filter filter);
+	idx_t (*duckdb_table_filter_get_struct_child_index)(duckdb_table_filter filter);
+	const char *(*duckdb_table_filter_get_struct_child_name)(duckdb_table_filter filter);
+	duckdb_table_filter (*duckdb_table_filter_get_struct_child_filter)(duckdb_table_filter filter);
 #endif
 
 } duckdb_ext_api_v0;
@@ -885,17 +898,30 @@ typedef struct {
 #define duckdb_destroy_cast_function                duckdb_ext_api.duckdb_destroy_cast_function
 
 // Version dev
-#define duckdb_param_logical_type                duckdb_ext_api.duckdb_param_logical_type
-#define duckdb_is_null_value                     duckdb_ext_api.duckdb_is_null_value
-#define duckdb_create_null_value                 duckdb_ext_api.duckdb_create_null_value
-#define duckdb_get_list_size                     duckdb_ext_api.duckdb_get_list_size
-#define duckdb_get_list_child                    duckdb_ext_api.duckdb_get_list_child
-#define duckdb_create_enum_value                 duckdb_ext_api.duckdb_create_enum_value
-#define duckdb_get_enum_value                    duckdb_ext_api.duckdb_get_enum_value
-#define duckdb_get_struct_child                  duckdb_ext_api.duckdb_get_struct_child
-#define duckdb_appender_create_ext               duckdb_ext_api.duckdb_appender_create_ext
-#define duckdb_table_description_create_ext      duckdb_ext_api.duckdb_table_description_create_ext
-#define duckdb_table_description_get_column_name duckdb_ext_api.duckdb_table_description_get_column_name
+#define duckdb_param_logical_type                      duckdb_ext_api.duckdb_param_logical_type
+#define duckdb_is_null_value                           duckdb_ext_api.duckdb_is_null_value
+#define duckdb_create_null_value                       duckdb_ext_api.duckdb_create_null_value
+#define duckdb_get_list_size                           duckdb_ext_api.duckdb_get_list_size
+#define duckdb_get_list_child                          duckdb_ext_api.duckdb_get_list_child
+#define duckdb_create_enum_value                       duckdb_ext_api.duckdb_create_enum_value
+#define duckdb_get_enum_value                          duckdb_ext_api.duckdb_get_enum_value
+#define duckdb_get_struct_child                        duckdb_ext_api.duckdb_get_struct_child
+#define duckdb_table_function_supports_filter_pushdown duckdb_ext_api.duckdb_table_function_supports_filter_pushdown
+#define duckdb_table_function_supports_filter_prune    duckdb_ext_api.duckdb_table_function_supports_filter_prune
+#define duckdb_init_get_table_filters                  duckdb_ext_api.duckdb_init_get_table_filters
+#define duckdb_table_filters_size                      duckdb_ext_api.duckdb_table_filters_size
+#define duckdb_table_filters_get_filter                duckdb_ext_api.duckdb_table_filters_get_filter
+#define duckdb_table_filter_get_type                   duckdb_ext_api.duckdb_table_filter_get_type
+#define duckdb_table_filter_get_children_count         duckdb_ext_api.duckdb_table_filter_get_children_count
+#define duckdb_table_filter_get_child                  duckdb_ext_api.duckdb_table_filter_get_child
+#define duckdb_table_filter_get_comparison_type        duckdb_ext_api.duckdb_table_filter_get_comparison_type
+#define duckdb_table_filter_get_constant               duckdb_ext_api.duckdb_table_filter_get_constant
+#define duckdb_table_filter_get_struct_child_index     duckdb_ext_api.duckdb_table_filter_get_struct_child_index
+#define duckdb_table_filter_get_struct_child_name      duckdb_ext_api.duckdb_table_filter_get_struct_child_name
+#define duckdb_table_filter_get_struct_child_filter    duckdb_ext_api.duckdb_table_filter_get_struct_child_filter
+#define duckdb_appender_create_ext                     duckdb_ext_api.duckdb_appender_create_ext
+#define duckdb_table_description_create_ext            duckdb_ext_api.duckdb_table_description_create_ext
+#define duckdb_table_description_get_column_name       duckdb_ext_api.duckdb_table_description_get_column_name
 
 //===--------------------------------------------------------------------===//
 // Struct Global Macros
